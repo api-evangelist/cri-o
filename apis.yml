@@ -1,0 +1,13 @@
+name: CRI-O
+description: Lightweight container runtime for Kubernetes that implements the Kubernetes
+  Container Runtime Interface (CRI) to enable using OCI compatible runtimes
+url: https://cri-o.io/
+tags:
+- Container Runtime
+- Kubernetes
+- OCI
+- Cloud Native
+created: '2025'
+modified: '2025'
+apis: []
+common: []
