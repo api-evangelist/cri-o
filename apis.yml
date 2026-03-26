@@ -1,13 +1,44 @@
+aid: cri-o
 name: CRI-O
-description: Lightweight container runtime for Kubernetes that implements the Kubernetes
-  Container Runtime Interface (CRI) to enable using OCI compatible runtimes
-url: https://cri-o.io/
+description: >-
+  CRI-O is a lightweight container runtime specifically designed for Kubernetes, implementing the Kubernetes Container Runtime Interface (CRI) to enable using any OCI-compatible runtime.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-- Container Runtime
-- Kubernetes
-- OCI
-- Cloud Native
+  - Containers
+  - Container Runtime
+  - Kubernetes
+  - OCI
+  - Cloud Native
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/cri-o/refs/heads/main/apis.yml
 created: '2025-01-01'
-modified: '2026-03-16'
-apis: []
-common: []
+modified: '2026-03-26'
+specificationVersion: '0.19'
+apis:
+  - aid: cri-o:cri-o
+    name: CRI-O
+    description: >-
+      CRI-O is a lightweight container runtime specifically designed for Kubernetes, implementing the Kubernetes Container Runtime Interface (CRI) to enable using any OCI-compatible runtime.
+    humanURL: https://cri-o.io/
+    tags:
+      - Container Runtime
+      - Kubernetes
+      - OCI
+    properties:
+      - type: Documentation
+        url: https://github.com/cri-o/cri-o/blob/main/README.md
+      - type: Getting Started
+        url: https://github.com/cri-o/cri-o/blob/main/install.md
+common:
+  - type: Website
+    url: https://cri-o.io/
+  - type: GitHub Organization
+    url: https://github.com/cri-o
+  - type: Blog
+    url: https://cri-o.io/#blog
+  - type: Community
+    url: https://github.com/cri-o/cri-o#getting-started
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
