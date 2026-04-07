@@ -5,11 +5,11 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Containers
+  - Cloud Native
   - Container Runtime
+  - Containers
   - Kubernetes
   - OCI
-  - Cloud Native
 url: >-
   https://raw.githubusercontent.com/api-evangelist/cri-o/refs/heads/main/apis.yml
 created: '2025-01-01'
