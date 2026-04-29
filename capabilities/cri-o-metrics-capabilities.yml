@@ -1,0 +1,62 @@
+name: CRI-O Metrics Capabilities
+description: >-
+  Workflow capabilities exposed by the CRI-O Prometheus metrics endpoint for
+  monitoring container runtime operations, image pulls, and error rates.
+url: https://github.com/cri-o/cri-o/blob/main/docs/metrics.md
+version: '1.0'
+modified: '2026-04-28'
+api: CRI-O Metrics API
+baseURL: http://localhost:9090
+capabilities:
+  - name: Runtime Operations Monitoring
+    description: >-
+      Scrape Prometheus metrics covering CRI-O operation counts, latencies,
+      and error counters across CRI verbs such as create_container,
+      start_container, and remove_container.
+    operations:
+      - getMetrics
+    inputs:
+      - scrape interval
+    outputs:
+      - Prometheus text exposition payload
+  - name: Image Pull Telemetry
+    description: >-
+      Track image pull counts, byte volumes, and failure rates per registry
+      to surface registry health and pull pressure on a node.
+    operations:
+      - getMetrics
+    inputs:
+      - scrape interval
+    outputs:
+      - image pull counters and histograms
+  - name: Capacity Planning Signals
+    description: >-
+      Use container lifecycle counters and operation latency histograms to
+      drive capacity planning and SLO tracking for Kubernetes node fleets.
+    operations:
+      - getMetrics
+    inputs:
+      - scrape interval
+    outputs:
+      - operation latency histograms
+useCases:
+  - name: Prometheus Scrape Integration
+    description: >-
+      Configure a Prometheus ServiceMonitor or static scrape job against
+      every node's CRI-O metrics endpoint to feed Grafana dashboards.
+    capabilities:
+      - Runtime Operations Monitoring
+      - Image Pull Telemetry
+  - name: Node SLO Tracking
+    description: >-
+      Define SLOs around CRI-O operation latency and error rate, alerting
+      when nodes deviate from baseline.
+    capabilities:
+      - Runtime Operations Monitoring
+      - Capacity Planning Signals
+  - name: Image Registry Health
+    description: >-
+      Detect failing or slow image registries by comparing pull counters
+      and error rates per registry name.
+    capabilities:
+      - Image Pull Telemetry

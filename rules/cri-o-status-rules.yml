@@ -1,0 +1,58 @@
+extends: ["spectral:oas"]
+documentationUrl: https://github.com/cri-o/cri-o
+rules:
+  cri-o-status-info-license:
+    description: API info object should declare the Apache 2.0 license.
+    given: "$.info.license"
+    severity: error
+    then:
+      field: name
+      function: pattern
+      functionOptions:
+        match: "Apache"
+  cri-o-status-server-localhost:
+    description: Servers should reference localhost for the Unix-socket-served HTTP API.
+    given: "$.servers[*].url"
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "localhost"
+  cri-o-status-info-paths:
+    description: API must define core informational paths /info and /config.
+    given: "$.paths"
+    severity: error
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required:
+            - /info
+            - /config
+  cri-o-status-lifecycle-paths:
+    description: API must define lifecycle paths for pause and unpause by container ID.
+    given: "$.paths"
+    severity: error
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required:
+            - /pause/{id}
+            - /unpause/{id}
+  cri-o-status-operation-id:
+    description: Every operation must define an operationId.
+    given: "$.paths.*.*"
+    severity: error
+    then:
+      field: operationId
+      function: truthy
+  cri-o-status-tags:
+    description: Every operation must define tags.
+    given: "$.paths.*.*"
+    severity: error
+    then:
+      field: tags
+      function: truthy

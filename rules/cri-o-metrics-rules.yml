@@ -1,0 +1,65 @@
+extends: ["spectral:oas"]
+documentationUrl: https://github.com/cri-o/cri-o/blob/main/docs/metrics.md
+rules:
+  cri-o-metrics-info-license:
+    description: API info object should declare the Apache 2.0 license.
+    given: "$.info.license"
+    severity: error
+    then:
+      field: name
+      function: pattern
+      functionOptions:
+        match: "Apache"
+  cri-o-metrics-server-port:
+    description: Server URL should reference the default metrics port 9090.
+    given: "$.servers[*].url"
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "9090"
+  cri-o-metrics-paths:
+    description: API must define the /metrics path.
+    given: "$.paths"
+    severity: error
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required:
+            - /metrics
+  cri-o-metrics-get-only:
+    description: Metrics endpoint must only support GET.
+    given: "$.paths['/metrics']"
+    severity: error
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          properties:
+            get:
+              type: object
+          additionalProperties: false
+  cri-o-metrics-text-plain-response:
+    description: Metrics 200 response must be text/plain (Prometheus exposition format).
+    given: "$.paths['/metrics'].get.responses.200.content"
+    severity: error
+    then:
+      field: text/plain
+      function: truthy
+  cri-o-metrics-operation-id:
+    description: Operations must define an operationId.
+    given: "$.paths.*.get"
+    severity: error
+    then:
+      field: operationId
+      function: truthy
+  cri-o-metrics-tags:
+    description: Operations must define tags.
+    given: "$.paths.*.get"
+    severity: error
+    then:
+      field: tags
+      function: truthy

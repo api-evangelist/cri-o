@@ -1,0 +1,75 @@
+name: CRI-O Status Capabilities
+description: >-
+  Workflow capabilities exposed by the CRI-O HTTP status API for runtime
+  introspection, container lifecycle control, and golang debugging.
+url: https://github.com/cri-o/cri-o
+version: '1.0'
+modified: '2026-04-28'
+api: CRI-O Status API
+baseURL: http://localhost
+capabilities:
+  - name: Runtime Introspection
+    description: >-
+      Retrieve daemon configuration, storage driver, cgroup driver, and
+      runtime defaults to understand how CRI-O is configured on a node.
+    operations:
+      - getInfo
+      - getConfig
+    inputs:
+      - cri-o socket path
+    outputs:
+      - daemon info JSON
+      - active TOML configuration
+  - name: Container Inspection
+    description: >-
+      Look up runtime details for a specific container by ID, including its
+      sandbox, image, PID, and creation time.
+    operations:
+      - getContainer
+    inputs:
+      - container ID
+    outputs:
+      - container info JSON
+  - name: Container Pause Control
+    description: >-
+      Pause and unpause running containers without killing them, useful for
+      debugging, snapshotting, or coordinating workloads.
+    operations:
+      - pauseContainer
+      - unpauseContainer
+    inputs:
+      - container ID
+    outputs:
+      - HTTP 204 on success
+  - name: Daemon Debugging
+    description: >-
+      Dump goroutine stacks for the running CRI-O daemon to diagnose
+      deadlocks, hangs, and unexpected runtime behaviour.
+    operations:
+      - getGoroutines
+    inputs:
+      - cri-o socket path
+    outputs:
+      - goroutine stack trace
+useCases:
+  - name: Node Troubleshooting
+    description: >-
+      Inspect storage and runtime configuration when diagnosing node-level
+      Kubernetes container failures.
+    capabilities:
+      - Runtime Introspection
+      - Container Inspection
+  - name: Live Debugging
+    description: >-
+      Pause a misbehaving container and dump CRI-O goroutines while
+      collecting forensic data, then unpause to restore service.
+    capabilities:
+      - Container Pause Control
+      - Daemon Debugging
+  - name: Operational Tooling Integration
+    description: >-
+      Build internal tooling that surfaces per-node CRI-O state for fleet
+      operators outside of kubelet and crictl.
+    capabilities:
+      - Runtime Introspection
+      - Container Inspection
