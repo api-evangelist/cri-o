@@ -4,105 +4,62 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: CRI-O
 providerId: cri-o
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
-  - Apache 2.0
   - CNCF
-  - Cloud Native
-  - conmon
   - Container Runtime
   - Containers
   - CRI
-  - Go
-  - Graduated
   - Kubernetes
   - OCI
   - Open Source
-  - Prometheus
-  - runc
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the CRI-O API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
-responseCodes:
-  throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
+description: CRI-O's APIs are local-host interfaces (CRI gRPC over a Unix socket, Status HTTP API,
+  Prometheus /metrics) consumed by the kubelet and operators. CRI-O does not enforce per-second request
+  rate limits on its own APIs; effective throughput is bounded by the host's CPU and the kubelet's
+  own pacing. CRI-O does, however, support image-pull rate limiting via the pause_image_auth_file and
+  the registries.conf rate-limiting controls (delegated to containers/image), and operator-side controls
+  (--pids-limit, container-cpu-quota) bound runtime resource consumption per container.
+sources:
+  - https://github.com/cri-o/cri-o/blob/main/docs/crio.conf.5.md
+  - https://github.com/cri-o/cri-o/blob/main/docs/metrics.md
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - CRI-O CRI gRPC API
-      - CRI-O Status API
-      - CRI-O Metrics API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - CRI-O CRI gRPC API
-      - CRI-O Status API
-      - CRI-O Metrics API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - CRI-O CRI gRPC API
-      - CRI-O Status API
-      - CRI-O Metrics API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - CRI-O CRI gRPC API
-      - CRI-O Status API
-      - CRI-O Metrics API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - CRI-O CRI gRPC API
-      - CRI-O Status API
-      - CRI-O Metrics API
+  - name: CRI gRPC API
+    scope: host
+    metric: requests_per_second
+    limit: not enforced upstream
+    notes: Served on /var/run/crio/crio.sock. Kubelet is the only documented consumer; CRI-O does not
+      apply its own throttle.
+  - name: Status HTTP API
+    scope: host
+    metric: requests_per_second
+    limit: not enforced upstream
+    notes: Documented as not stable for production use; intended for operator inspection.
+  - name: Metrics endpoint
+    scope: host
+    metric: requests_per_second
+    limit: not enforced upstream
+    notes: Prometheus scrape target on the configured port (default 9090).
+  - name: Image-pull rate
+    scope: host
+    metric: pulls_per_second
+    limit: registry-bound
+    notes: Bounded by the upstream registry rate limits (e.g. Docker Hub) and any retry / backoff
+      configured in containers/image. CRI-O respects 429 / Retry-After when surfaced by the registry.
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Local-host APIs
+    description: CRI-O APIs run on the node, not as a hosted service. There is no provider-imposed
+      per-second limit; throughput is bounded by node CPU and the kubelet's own request pacing.
+  - name: Image-pull backoff
+    description: When image registries return 429 (Docker Hub anonymous-pull limits, etc.), CRI-O surfaces
+      the error to the kubelet, which honors its image-pull backoff policy.
+  - name: Resource constraints
+    description: Operator-configured runtime constraints (--pids-limit, --cpu-quota, --memory-limit)
+      bound per-container resource consumption rather than per-request rate.
+notes: CRI-O is open-source and node-local, so there are no provider-imposed rate limits on its APIs.
+  Reconciled is false because there is no provider rate-limit document to reconcile against; this
+  artifact captures the published behavior around image-pull throttling and operator-configured constraints.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

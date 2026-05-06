@@ -1,5 +1,6 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -8,153 +9,92 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: CRI-O
 providerId: cri-o
-publisherName: CRI-O
-serviceCategory: API
+publisherName: CRI-O Authors / CNCF
+serviceCategory: Open Source Container Runtime
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
-  - Apache 2.0
   - CNCF
-  - Cloud Native
-  - conmon
   - Container Runtime
   - Containers
   - CRI
-  - Go
-  - Graduated
   - Kubernetes
   - OCI
   - Open Source
-  - Prometheus
-  - runc
   - FinOps
-  - Cost Management
   - FOCUS
-description: FinOps framework definition for the CRI-O API surface. Provides a FOCUS-aligned mapping for
-  cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+description: FinOps shape for CRI-O - an Apache 2.0 / CNCF Graduated open-source container runtime.
+  There is no upstream invoice. Operator cost is borne by the underlying compute (node-hours), image
+  storage, and image-pull egress on the hosting cluster.
+sources:
+  - https://cri-o.io/
+  - https://github.com/cri-o/cri-o
+  - https://www.cncf.io/projects/cri-o/
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
-  billingCurrency: USD
-  chargeCategories:
-    - Usage
-    - Purchase
-    - Tax
-    - Credit
-    - Adjustment
-  chargeFrequency: Recurring
+  pricingCategory: Open Source (No Charge)
+  billingFrequency: N/A
+  billingCurrency: N/A
+  chargeCategories: []
+  chargeFrequency: N/A
 focusColumns:
   ServiceName: CRI-O
-  ServiceCategory: Developer Tools / API
-  ProviderName: CRI-O
-  PublisherName: CRI-O
-  InvoiceIssuerName: CRI-O
-  PricingCategory: Usage-Based
-  PricingUnit: request
-  BillingCurrency: USD
-  ChargeCategory: Usage
+  ServiceCategory: Open Source Container Runtime
+  ProviderName: CRI-O Project
+  PublisherName: CRI-O Authors / CNCF
+  PricingCategory: Free
+  BillingCurrency: N/A
+  ChargeCategory: N/A
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
+  - name: container_runtime_hours
+    description: Node-hours of CRI-O runtime time (proxied via underlying node billing on the cloud
+      provider)
+    unit: node-hour
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
+      - cluster
+      - node_pool
+  - name: image_pulls
+    description: Container image pull operations (drives upstream registry egress and any registry
+      bandwidth charges)
+    unit: pull
+    aggregation: sum
+    dimensions:
+      - registry
+      - image
+      - cluster
+  - name: image_storage
+    description: Container image / layer storage on the node disk (drives node-disk capacity sizing)
     unit: GB
+    aggregation: avg
+    dimensions:
+      - node_pool
+      - cluster
+  - name: container_starts
+    description: Container start events (operational metric from CRI-O Prometheus metrics)
+    unit: event
     aggregation: sum
     dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: CRI-O CRI gRPC API
-    baseURL: ''
-    tags:
-      - CRI
-      - gRPC
-      - Kubelet
-      - Kubernetes
-    serviceName: CRI-O CRI gRPC API
-    serviceCategory: API
-  - name: CRI-O Status API
-    baseURL: http://localhost
-    tags:
-      - Debugging
-      - HTTP
-      - Lifecycle
-      - Status
-    serviceName: CRI-O Status API
-    serviceCategory: API
-  - name: CRI-O Metrics API
-    baseURL: http://localhost:9090
-    tags:
-      - Metrics
-      - Monitoring
-      - Observability
-      - Prometheus
-    serviceName: CRI-O Metrics API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - cluster
+      - namespace
+principles:
+  - name: Visibility
+    description: CRI-O itself is free; observe cost via the Prometheus /metrics endpoint (image pulls,
+      operations, errors) joined to FOCUS-aligned node-hour billing.
+  - name: Allocation
+    description: Allocate node-hour cost to namespaces / workloads via Kubernetes labels; image-pull
+      egress can be attributed to the namespace whose pod triggered the pull.
+  - name: Optimization
+    description: Use a registry mirror or pull-through cache to cut registry egress; configure
+      drop_infra_ctr and small-pause images to reduce per-pod overhead; right-size node-pool to actual
+      pod density; prune unused images on a schedule via crictl rmi to control disk consumption.
+  - name: Accountability
+    description: Assign a platform-team owner for the container-runtime layer; alert on image-pull
+      error rate and inode pressure; review CRI-O / Kubernetes upgrade cadence to keep the runtime
+      patched without extra paid support.
+notes: CRI-O is open-source with no upstream commercial billing. FinOps for CRI-O is FinOps for the
+  underlying node compute, image storage, and image-pull egress. Reconciled is false because there
+  is no provider rate card or invoice to reconcile against.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
