@@ -1,0 +1,117 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: CRI-O Status API — Lifecycle
+  description: 'CRI-O Status API — Lifecycle. 2 operations. Lead operation: Pause a container. Self-contained Naftiko capability
+    covering one Cri O business surface.'
+  tags:
+  - Cri O
+  - Lifecycle
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CRI_O_API_KEY: CRI_O_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: status-lifecycle
+    baseUri: http://localhost
+    description: CRI-O Status API — Lifecycle business capability. Self-contained, no shared references.
+    resources:
+    - name: pause-id
+      path: /pause/{id}
+      operations:
+      - name: pausecontainer
+        method: POST
+        description: Pause a container
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+    - name: unpause-id
+      path: /unpause/{id}
+      operations:
+      - name: unpausecontainer
+        method: POST
+        description: Unpause a container
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+  exposes:
+  - type: rest
+    namespace: status-lifecycle-rest
+    port: 8080
+    description: REST adapter for CRI-O Status API — Lifecycle. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/pause/{id}
+      name: pause-id
+      description: REST surface for pause-id.
+      operations:
+      - method: POST
+        name: pausecontainer
+        description: Pause a container
+        call: status-lifecycle.pausecontainer
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/unpause/{id}
+      name: unpause-id
+      description: REST surface for unpause-id.
+      operations:
+      - method: POST
+        name: unpausecontainer
+        description: Unpause a container
+        call: status-lifecycle.unpausecontainer
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: status-lifecycle-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for CRI-O Status API — Lifecycle. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: pause-container
+      description: Pause a container
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: status-lifecycle.pausecontainer
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: unpause-container
+      description: Unpause a container
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: status-lifecycle.unpausecontainer
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

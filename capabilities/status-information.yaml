@@ -1,0 +1,99 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: CRI-O Status API — Information
+  description: 'CRI-O Status API — Information. 2 operations. Lead operation: Get runtime configuration. Self-contained Naftiko
+    capability covering one Cri O business surface.'
+  tags:
+  - Cri O
+  - Information
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CRI_O_API_KEY: CRI_O_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: status-information
+    baseUri: http://localhost
+    description: CRI-O Status API — Information business capability. Self-contained, no shared references.
+    resources:
+    - name: config
+      path: /config
+      operations:
+      - name: getconfig
+        method: GET
+        description: Get runtime configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: info
+      path: /info
+      operations:
+      - name: getinfo
+        method: GET
+        description: Get runtime information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: status-information-rest
+    port: 8080
+    description: REST adapter for CRI-O Status API — Information. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/config
+      name: config
+      description: REST surface for config.
+      operations:
+      - method: GET
+        name: getconfig
+        description: Get runtime configuration
+        call: status-information.getconfig
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/info
+      name: info
+      description: REST surface for info.
+      operations:
+      - method: GET
+        name: getinfo
+        description: Get runtime information
+        call: status-information.getinfo
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: status-information-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for CRI-O Status API — Information. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-runtime-configuration
+      description: Get runtime configuration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: status-information.getconfig
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-runtime-information
+      description: Get runtime information
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: status-information.getinfo
+      outputParameters:
+      - type: object
+        mapping: $.

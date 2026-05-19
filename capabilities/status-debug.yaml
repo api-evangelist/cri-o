@@ -1,0 +1,67 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: CRI-O Status API — Debug
+  description: 'CRI-O Status API — Debug. 1 operations. Lead operation: Dump goroutine stacks. Self-contained Naftiko capability
+    covering one Cri O business surface.'
+  tags:
+  - Cri O
+  - Debug
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CRI_O_API_KEY: CRI_O_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: status-debug
+    baseUri: http://localhost
+    description: CRI-O Status API — Debug business capability. Self-contained, no shared references.
+    resources:
+    - name: debug-goroutines
+      path: /debug/goroutines
+      operations:
+      - name: getgoroutines
+        method: GET
+        description: Dump goroutine stacks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: status-debug-rest
+    port: 8080
+    description: REST adapter for CRI-O Status API — Debug. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/debug/goroutines
+      name: debug-goroutines
+      description: REST surface for debug-goroutines.
+      operations:
+      - method: GET
+        name: getgoroutines
+        description: Dump goroutine stacks
+        call: status-debug.getgoroutines
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: status-debug-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for CRI-O Status API — Debug. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: dump-goroutine-stacks
+      description: Dump goroutine stacks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: status-debug.getgoroutines
+      outputParameters:
+      - type: object
+        mapping: $.
