@@ -1,0 +1,102 @@
+{
+  "item": [
+    {
+      "id": "ce824435-c645-49ec-b587-a5d3eb41dcbb",
+      "name": "Metrics",
+      "description": {
+        "content": "Prometheus metrics scraping endpoint.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e7c1a489-47e7-430e-86b3-2bcb31a77088",
+          "name": "Scrape Prometheus metrics",
+          "request": {
+            "name": "Scrape Prometheus metrics",
+            "description": {
+              "content": "Returns the current CRI-O metrics in the Prometheus text exposition format, including operation counters, latency histograms, image pull statistics, and error counters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "metrics"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dc1d17d2-aa44-4c42-8729-2e4b69a3c5d1",
+              "name": "Prometheus metrics in text exposition format.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "# HELP container_runtime_crio_operations_total Cumulative number of CRI-O operations by operation type.\n# TYPE container_runtime_crio_operations_total counter\ncontainer_runtime_crio_operations_total{operation_type=\"create_container\"} 42\n",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:9090",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "fd2c9382-7192-4718-9a89-c1c8dc21c660",
+    "name": "CRI-O Metrics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CRI-O metrics endpoint exposes Prometheus-compatible metrics for operations, image pulls, container lifecycle, and runtime errors. Metrics are enabled with the --enable-metrics daemon flag and served on the port configured by --metrics-port (default 9090) at the /metrics path. The endpoint can also be served over a Unix socket via --metrics-socket and secured using --metrics-cert and --metrics-key for TLS.\n\nContact Support:\n Name: CRI-O Project",
+      "type": "text/plain"
+    }
+  }
+}

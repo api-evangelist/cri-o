@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CRI-O Status API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Information",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get runtime information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost/info"
+          },
+          "docs": "Returns daemon information including storage driver, storage root, cgroup driver, and runtime defaults."
+        },
+        {
+          "info": {
+            "name": "Get runtime configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost/config"
+          },
+          "docs": "Returns the active CRI-O TOML configuration as plain text."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Containers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get container info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost/containers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Container ID."
+              }
+            ]
+          },
+          "docs": "Returns runtime information about a single container by ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Lifecycle",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Pause a container",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost/pause/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Pauses a running container by ID."
+        },
+        {
+          "info": {
+            "name": "Unpause a container",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost/unpause/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Unpauses a paused container by ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Debug",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Dump goroutine stacks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost/debug/goroutines"
+          },
+          "docs": "Returns the current goroutine stack traces for the daemon."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

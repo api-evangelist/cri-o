@@ -1,0 +1,631 @@
+{
+  "item": [
+    {
+      "id": "56f27be6-75ea-4d5c-b3ba-1c92d9eb59ee",
+      "name": "Information",
+      "description": {
+        "content": "Runtime version, configuration, and general info endpoints.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "30ec3552-8a38-40b6-9a3d-4d2b8af8bf4d",
+          "name": "Get runtime information",
+          "request": {
+            "name": "Get runtime information",
+            "description": {
+              "content": "Returns daemon information including storage driver, storage root, cgroup driver, and runtime defaults.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8887dc9d-8f44-4fce-b023-8277e0793f34",
+              "name": "Runtime information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"storage_driver\": \"string\",\n  \"storage_root\": \"string\",\n  \"cgroup_driver\": \"string\",\n  \"default_runtime\": \"string\",\n  \"runtimes\": {\n    \"key_0\": 5598,\n    \"key_1\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1788746e-d5db-4d66-b833-daa5465ea6e2",
+          "name": "Get runtime configuration",
+          "request": {
+            "name": "Get runtime configuration",
+            "description": {
+              "content": "Returns the active CRI-O TOML configuration as plain text.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e387926d-b08a-48c5-b6a7-0eac596ae253",
+              "name": "TOML configuration document",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "b65eaf96-aca9-4315-847c-bd395c49d878",
+      "name": "Containers",
+      "description": {
+        "content": "Endpoints that return information about live containers.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b9f9f8e9-91ac-4d9c-848b-af709239a6a6",
+          "name": "Get container info",
+          "request": {
+            "name": "Get container info",
+            "description": {
+              "content": "Returns runtime information about a single container by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "containers",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Container ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dd3b4985-9b8c-429c-9d90-34b055cde62e",
+              "name": "Container information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Container ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"image\": \"string\",\n  \"pid\": 4680,\n  \"sandbox_id\": \"string\",\n  \"created_time\": \"1962-06-18T15:23:56.076Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f5b0308-4f5e-4865-bed4-0ecaff91cbfa",
+              "name": "Container not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Container ID."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "651d25fd-a80f-424b-897a-a12f8117220f",
+      "name": "Lifecycle",
+      "description": {
+        "content": "Endpoints to pause and unpause running containers.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9fc986f0-e50b-4863-bf69-f7879d29aff7",
+          "name": "Pause a container",
+          "request": {
+            "name": "Pause a container",
+            "description": {
+              "content": "Pauses a running container by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pause",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f94c20dd-3a59-4819-a031-cd2e6c6f4a01",
+              "name": "Container paused",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pause",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0cc173fd-0386-42f2-b7a5-e07183341b23",
+              "name": "Container not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pause",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f80f7f3a-f3a6-4d54-8a58-d9bd412da91f",
+          "name": "Unpause a container",
+          "request": {
+            "name": "Unpause a container",
+            "description": {
+              "content": "Unpauses a paused container by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "unpause",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5e076567-3536-4bc9-b792-02b4f53c08f3",
+              "name": "Container unpaused",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "unpause",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3a1922ee-4c1a-4fe7-a604-5559afe77231",
+              "name": "Container not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "unpause",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "f99eadb2-c2df-4017-926d-69dfe64ef605",
+      "name": "Debug",
+      "description": {
+        "content": "Golang debug endpoints for goroutines, heap, and profiling.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4632cf6a-7a9b-43f7-a2ee-edc9fc11ca0d",
+          "name": "Dump goroutine stacks",
+          "request": {
+            "name": "Dump goroutine stacks",
+            "description": {
+              "content": "Returns the current goroutine stack traces for the daemon.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "debug",
+                "goroutines"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5280b5f5-4451-4bb4-9ac9-a82ecea82d2e",
+              "name": "Goroutine stack dump as plain text.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "debug",
+                    "goroutines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "eb690007-0d61-4531-ae68-c01a08f696c9",
+    "name": "CRI-O Status API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CRI-O Status API is an HTTP server exposed by the cri-o daemon over a Unix domain socket (default /var/run/crio/crio.sock for the gRPC CRI and /var/run/crio/crio.info for status). It provides runtime introspection endpoints for retrieving daemon configuration, version, container information, and golang debug data. As noted upstream, this API is not considered stable for production use and is intended for debugging, operations, and tooling integrations.\n\nContact Support:\n Name: CRI-O Project",
+      "type": "text/plain"
+    }
+  }
+}
