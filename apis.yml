@@ -9,7 +9,7 @@ description: >-
   runtime surface, while also exposing an HTTP status API and Prometheus metrics endpoint for operations and
   observability.
 url: https://raw.githubusercontent.com/api-evangelist/cri-o/refs/heads/main/apis.yml
-image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Apache 2.0
   - CNCF
