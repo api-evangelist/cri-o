@@ -3,19 +3,12 @@
   "feeds": [
     {
       "source": "https://cri-o.io/#blog",
-      "feed_url": "https://cri-o.io/#blog",
-      "title": "",
+      "feed_url": "",
       "saved": 0,
-      "method": "none"
-    },
-    {
-      "source": "https://github.com/cri-o/cri-o",
-      "feed_url": "https://github.com/cri-o/cri-o",
-      "title": "",
-      "saved": 0,
-      "method": "none"
+      "method": "agent-scrape"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-14T20:42:17Z"
+  "fetched": "2026-06-27T12:34:49Z",
+  "agent_pulled": "2026-06-27"
 }
