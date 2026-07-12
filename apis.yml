@@ -99,6 +99,8 @@ apis:
       - Observability
       - Prometheus
 common:
+  - type: DomainSecurity
+    url: security/cri-o-domain-security.yml
   - type: Website
     url: https://cri-o.io/
   - type: Documentation
