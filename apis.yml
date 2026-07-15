@@ -99,6 +99,8 @@ apis:
       - Observability
       - Prometheus
 common:
+  - type: AgenticAccess
+    url: agentic-access/cri-o-agentic-access.yml
   - type: DomainSecurity
     url: security/cri-o-domain-security.yml
   - type: Website
