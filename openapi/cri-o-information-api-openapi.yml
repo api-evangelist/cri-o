@@ -1,0 +1,65 @@
+openapi: 3.1.0
+info:
+  title: CRI-O Metrics Containers Information API
+  description: The CRI-O metrics endpoint exposes Prometheus-compatible metrics for operations, image pulls, container lifecycle, and runtime errors. Metrics are enabled with the --enable-metrics daemon flag and served on the port configured by --metrics-port (default 9090) at the /metrics path. The endpoint can also be served over a Unix socket via --metrics-socket and secured using --metrics-cert and --metrics-key for TLS.
+  version: '1.0'
+  contact:
+    name: CRI-O Project
+    url: https://cri-o.io/
+  license:
+    name: Apache 2.0
+    url: https://github.com/cri-o/cri-o/blob/main/LICENSE
+servers:
+- url: http://localhost:9090
+  description: Default CRI-O metrics endpoint
+tags:
+- name: Information
+  description: Runtime version, configuration, and general info endpoints.
+paths:
+  /info:
+    get:
+      tags:
+      - Information
+      operationId: getInfo
+      summary: Get runtime information
+      description: Returns daemon information including storage driver, storage root, cgroup driver, and runtime defaults.
+      responses:
+        '200':
+          description: Runtime information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Info'
+  /config:
+    get:
+      tags:
+      - Information
+      operationId: getConfig
+      summary: Get runtime configuration
+      description: Returns the active CRI-O TOML configuration as plain text.
+      responses:
+        '200':
+          description: TOML configuration document
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  schemas:
+    Info:
+      type: object
+      properties:
+        storage_driver:
+          type: string
+        storage_root:
+          type: string
+        cgroup_driver:
+          type: string
+        default_runtime:
+          type: string
+        runtimes:
+          type: object
+          additionalProperties: true
+externalDocs:
+  description: CRI-O Metrics Documentation
+  url: https://github.com/cri-o/cri-o/blob/main/docs/metrics.md

@@ -1,0 +1,57 @@
+openapi: 3.1.0
+info:
+  title: CRI-O Metrics Containers Lifecycle API
+  description: The CRI-O metrics endpoint exposes Prometheus-compatible metrics for operations, image pulls, container lifecycle, and runtime errors. Metrics are enabled with the --enable-metrics daemon flag and served on the port configured by --metrics-port (default 9090) at the /metrics path. The endpoint can also be served over a Unix socket via --metrics-socket and secured using --metrics-cert and --metrics-key for TLS.
+  version: '1.0'
+  contact:
+    name: CRI-O Project
+    url: https://cri-o.io/
+  license:
+    name: Apache 2.0
+    url: https://github.com/cri-o/cri-o/blob/main/LICENSE
+servers:
+- url: http://localhost:9090
+  description: Default CRI-O metrics endpoint
+tags:
+- name: Lifecycle
+  description: Endpoints to pause and unpause running containers.
+paths:
+  /pause/{id}:
+    post:
+      tags:
+      - Lifecycle
+      operationId: pauseContainer
+      summary: Pause a container
+      description: Pauses a running container by ID.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Container paused
+        '404':
+          description: Container not found
+  /unpause/{id}:
+    post:
+      tags:
+      - Lifecycle
+      operationId: unpauseContainer
+      summary: Unpause a container
+      description: Unpauses a paused container by ID.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Container unpaused
+        '404':
+          description: Container not found
+externalDocs:
+  description: CRI-O Metrics Documentation
+  url: https://github.com/cri-o/cri-o/blob/main/docs/metrics.md

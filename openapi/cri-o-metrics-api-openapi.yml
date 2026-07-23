@@ -1,0 +1,42 @@
+openapi: 3.1.0
+info:
+  title: CRI-O Containers Metrics API
+  description: The CRI-O metrics endpoint exposes Prometheus-compatible metrics for operations, image pulls, container lifecycle, and runtime errors. Metrics are enabled with the --enable-metrics daemon flag and served on the port configured by --metrics-port (default 9090) at the /metrics path. The endpoint can also be served over a Unix socket via --metrics-socket and secured using --metrics-cert and --metrics-key for TLS.
+  version: '1.0'
+  contact:
+    name: CRI-O Project
+    url: https://cri-o.io/
+  license:
+    name: Apache 2.0
+    url: https://github.com/cri-o/cri-o/blob/main/LICENSE
+servers:
+- url: http://localhost:9090
+  description: Default CRI-O metrics endpoint
+tags:
+- name: Metrics
+  description: Prometheus metrics scraping endpoint.
+paths:
+  /metrics:
+    get:
+      tags:
+      - Metrics
+      operationId: getMetrics
+      summary: Scrape Prometheus metrics
+      description: Returns the current CRI-O metrics in the Prometheus text exposition format, including operation counters, latency histograms, image pull statistics, and error counters.
+      responses:
+        '200':
+          description: Prometheus metrics in text exposition format.
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: '# HELP container_runtime_crio_operations_total Cumulative number of CRI-O operations by operation type.
+
+                # TYPE container_runtime_crio_operations_total counter
+
+                container_runtime_crio_operations_total{operation_type="create_container"} 42
+
+                '
+externalDocs:
+  description: CRI-O Metrics Documentation
+  url: https://github.com/cri-o/cri-o/blob/main/docs/metrics.md
