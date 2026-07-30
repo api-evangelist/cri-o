@@ -9,7 +9,19 @@ description: >-
   runtime surface, while also exposing an HTTP status API and Prometheus metrics endpoint for operations and
   observability.
 url: https://raw.githubusercontent.com/api-evangelist/cri-o/refs/heads/main/apis.yml
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: free
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Free
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/cri-o.png
 tags:
   - Apache 2.0
   - CNCF
@@ -32,72 +44,136 @@ type: Index
 access: Public
 position: Provider
 apis:
-  - aid: cri-o:cri-o-cri-grpc-api
-    name: CRI-O CRI gRPC API
-    description: >-
-      CRI-O implements the Kubernetes Container Runtime Interface (CRI) gRPC API that the kubelet uses to manage pod
-      sandboxes, containers, image lifecycle, and runtime status. The CRI gRPC API is served over a Unix domain socket
-      (default /var/run/crio/crio.sock) and includes services for RuntimeService and ImageService as defined by the
-      upstream CRI protobuf specification.
-    humanURL: https://kubernetes.io/docs/concepts/architecture/cri/
-    properties:
-      - type: Documentation
-        url: https://kubernetes.io/docs/concepts/architecture/cri/
-      - type: Specification
-        url: https://github.com/kubernetes/cri-api
-      - type: GitHubRepository
-        url: https://github.com/cri-o/cri-o
-    tags:
-      - CRI
-      - gRPC
-      - Kubelet
-      - Kubernetes
-  - aid: cri-o:cri-o-status-api
-    name: CRI-O Status API
-    description: >-
-      The CRI-O Status API is an HTTP server exposed by the cri-o daemon for runtime introspection, container
-      inspection, and lifecycle control. It provides /info and /config endpoints for daemon configuration,
-      /containers/{id} for live container inspection, /pause/{id} and /unpause/{id} to control container execution, and
-      /debug endpoints for golang debugging. As noted upstream, this API is not considered stable for production use.
-    humanURL: https://github.com/cri-o/cri-o
-    baseURL: http://localhost
-    properties:
-      - type: Documentation
-        url: https://github.com/cri-o/cri-o
-      - type: OpenAPI
-        url: openapi/cri-o-status-openapi.yml
-      - type: Rules
-        url: rules/cri-o-status-rules.yml
-      - type: Capabilities
-        url: capabilities/cri-o-status-capabilities.yml
-    tags:
-      - Debugging
-      - HTTP
-      - Lifecycle
-      - Status
-  - aid: cri-o:cri-o-metrics-api
-    name: CRI-O Metrics API
-    description: >-
-      The CRI-O metrics endpoint exposes Prometheus-compatible metrics for operation counts, container lifecycle, image
-      pulls, and errors. It is enabled with the --enable-metrics flag and served on the configured port (default 9090)
-      at the /metrics path. The endpoint can also be served over a Unix socket and secured with TLS for cluster-grade
-      observability.
-    humanURL: https://github.com/cri-o/cri-o/blob/main/docs/metrics.md
-    baseURL: http://localhost:9090
-    properties:
-      - type: Documentation
-        url: https://github.com/cri-o/cri-o/blob/main/docs/metrics.md
-      - type: OpenAPI
-        url: openapi/cri-o-metrics-openapi.yml
-      - type: Rules
-        url: rules/cri-o-metrics-rules.yml
-      - type: Capabilities
-        url: capabilities/cri-o-metrics-capabilities.yml
-    tags:
-      - Metrics
-      - Monitoring
-      - Observability
-      - Prometheus
+- aid: cri-o:cri-o-cri-grpc-api
+  name: CRI-O CRI gRPC API
+  description: >-
+    CRI-O implements the Kubernetes Container Runtime Interface (CRI) gRPC API that the kubelet uses to
+    manage pod sandboxes, containers, image lifecycle, and runtime status. The CRI gRPC API is served
+    over a Unix domain socket (default /var/run/crio/crio.sock) and includes services for RuntimeService
+    and ImageService as defined by the upstream CRI protobuf specification.
+  humanURL: https://kubernetes.io/docs/concepts/architecture/cri/
+  properties:
+  - type: Documentation
+    url: https://kubernetes.io/docs/concepts/architecture/cri/
+  - type: Specification
+    url: https://github.com/kubernetes/cri-api
+  - type: GitHubRepository
+    url: https://github.com/cri-o/cri-o
+  tags:
+  - CRI
+  - gRPC
+  - Kubelet
+  - Kubernetes
+- aid: cri-o:cri-o-containers-api
+  name: CRI-O Containers API
+  description: Endpoints that return information about live containers.
+  humanURL: https://kubernetes.io/docs/concepts/architecture/cri/
+  baseURL: http://localhost
+  tags:
+  - Containers
+  properties:
+  - type: OpenAPI
+    url: openapi/cri-o-containers-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/cri-o/cri-o
+  - type: Rules
+    url: rules/cri-o-status-rules.yml
+  - type: Capabilities
+    url: capabilities/cri-o-status-capabilities.yml
+  - type: Documentation
+    url: https://github.com/cri-o/cri-o/blob/main/docs/metrics.md
+  - type: Rules
+    url: rules/cri-o-metrics-rules.yml
+  - type: Capabilities
+    url: capabilities/cri-o-metrics-capabilities.yml
+- aid: cri-o:cri-o-debug-api
+  name: CRI-O Debug API
+  description: Golang debug endpoints for goroutines, heap, and profiling.
+  humanURL: https://kubernetes.io/docs/concepts/architecture/cri/
+  baseURL: http://localhost
+  tags:
+  - Debug
+  properties:
+  - type: OpenAPI
+    url: openapi/cri-o-debug-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/cri-o/cri-o
+  - type: Rules
+    url: rules/cri-o-status-rules.yml
+  - type: Capabilities
+    url: capabilities/cri-o-status-capabilities.yml
+  - type: Documentation
+    url: https://github.com/cri-o/cri-o/blob/main/docs/metrics.md
+  - type: Rules
+    url: rules/cri-o-metrics-rules.yml
+  - type: Capabilities
+    url: capabilities/cri-o-metrics-capabilities.yml
+- aid: cri-o:cri-o-information-api
+  name: CRI-O Information API
+  description: Runtime version, configuration, and general info endpoints.
+  humanURL: https://kubernetes.io/docs/concepts/architecture/cri/
+  baseURL: http://localhost
+  tags:
+  - Information
+  properties:
+  - type: OpenAPI
+    url: openapi/cri-o-information-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/cri-o/cri-o
+  - type: Rules
+    url: rules/cri-o-status-rules.yml
+  - type: Capabilities
+    url: capabilities/cri-o-status-capabilities.yml
+  - type: Documentation
+    url: https://github.com/cri-o/cri-o/blob/main/docs/metrics.md
+  - type: Rules
+    url: rules/cri-o-metrics-rules.yml
+  - type: Capabilities
+    url: capabilities/cri-o-metrics-capabilities.yml
+- aid: cri-o:cri-o-lifecycle-api
+  name: CRI-O Lifecycle API
+  description: Endpoints to pause and unpause running containers.
+  humanURL: https://kubernetes.io/docs/concepts/architecture/cri/
+  baseURL: http://localhost
+  tags:
+  - Lifecycle
+  properties:
+  - type: OpenAPI
+    url: openapi/cri-o-lifecycle-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/cri-o/cri-o
+  - type: Rules
+    url: rules/cri-o-status-rules.yml
+  - type: Capabilities
+    url: capabilities/cri-o-status-capabilities.yml
+  - type: Documentation
+    url: https://github.com/cri-o/cri-o/blob/main/docs/metrics.md
+  - type: Rules
+    url: rules/cri-o-metrics-rules.yml
+  - type: Capabilities
+    url: capabilities/cri-o-metrics-capabilities.yml
+- aid: cri-o:cri-o-metrics-api
+  name: CRI-O Metrics API
+  description: Prometheus metrics scraping endpoint.
+  humanURL: https://kubernetes.io/docs/concepts/architecture/cri/
+  baseURL: http://localhost
+  tags:
+  - Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/cri-o-metrics-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/cri-o/cri-o
+  - type: Rules
+    url: rules/cri-o-status-rules.yml
+  - type: Capabilities
+    url: capabilities/cri-o-status-capabilities.yml
+  - type: Documentation
+    url: https://github.com/cri-o/cri-o/blob/main/docs/metrics.md
+  - type: Rules
+    url: rules/cri-o-metrics-rules.yml
+  - type: Capabilities
+    url: capabilities/cri-o-metrics-capabilities.yml
 common:
   - type: AgenticAccess
     url: agentic-access/cri-o-agentic-access.yml
