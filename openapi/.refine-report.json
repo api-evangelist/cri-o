@@ -1,0 +1,22 @@
+{
+  "provider": "cri-o",
+  "sources": [
+    "cri-o-containers-api-openapi.yml",
+    "cri-o-debug-api-openapi.yml",
+    "cri-o-information-api-openapi.yml",
+    "cri-o-lifecycle-api-openapi.yml",
+    "cri-o-metrics-api-openapi.yml"
+  ],
+  "outputs": [
+    "cri-o-containers-api-openapi.yml",
+    "cri-o-debug-api-openapi.yml",
+    "cri-o-information-api-openapi.yml",
+    "cri-o-lifecycle-api-openapi.yml",
+    "cri-o-metrics-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
