@@ -78,14 +78,10 @@ apis:
     url: https://github.com/cri-o/cri-o
   - type: Rules
     url: rules/cri-o-status-rules.yml
-  - type: Capabilities
-    url: capabilities/cri-o-status-capabilities.yml
   - type: Documentation
     url: https://github.com/cri-o/cri-o/blob/main/docs/metrics.md
   - type: Rules
     url: rules/cri-o-metrics-rules.yml
-  - type: Capabilities
-    url: capabilities/cri-o-metrics-capabilities.yml
 - aid: cri-o:cri-o-debug-api
   name: CRI-O Debug API
   description: Golang debug endpoints for goroutines, heap, and profiling.
@@ -100,14 +96,10 @@ apis:
     url: https://github.com/cri-o/cri-o
   - type: Rules
     url: rules/cri-o-status-rules.yml
-  - type: Capabilities
-    url: capabilities/cri-o-status-capabilities.yml
   - type: Documentation
     url: https://github.com/cri-o/cri-o/blob/main/docs/metrics.md
   - type: Rules
     url: rules/cri-o-metrics-rules.yml
-  - type: Capabilities
-    url: capabilities/cri-o-metrics-capabilities.yml
 - aid: cri-o:cri-o-information-api
   name: CRI-O Information API
   description: Runtime version, configuration, and general info endpoints.
@@ -122,14 +114,10 @@ apis:
     url: https://github.com/cri-o/cri-o
   - type: Rules
     url: rules/cri-o-status-rules.yml
-  - type: Capabilities
-    url: capabilities/cri-o-status-capabilities.yml
   - type: Documentation
     url: https://github.com/cri-o/cri-o/blob/main/docs/metrics.md
   - type: Rules
     url: rules/cri-o-metrics-rules.yml
-  - type: Capabilities
-    url: capabilities/cri-o-metrics-capabilities.yml
 - aid: cri-o:cri-o-lifecycle-api
   name: CRI-O Lifecycle API
   description: Endpoints to pause and unpause running containers.
@@ -144,14 +132,10 @@ apis:
     url: https://github.com/cri-o/cri-o
   - type: Rules
     url: rules/cri-o-status-rules.yml
-  - type: Capabilities
-    url: capabilities/cri-o-status-capabilities.yml
   - type: Documentation
     url: https://github.com/cri-o/cri-o/blob/main/docs/metrics.md
   - type: Rules
     url: rules/cri-o-metrics-rules.yml
-  - type: Capabilities
-    url: capabilities/cri-o-metrics-capabilities.yml
 - aid: cri-o:cri-o-metrics-api
   name: CRI-O Metrics API
   description: Prometheus metrics scraping endpoint.
@@ -166,15 +150,19 @@ apis:
     url: https://github.com/cri-o/cri-o
   - type: Rules
     url: rules/cri-o-status-rules.yml
-  - type: Capabilities
-    url: capabilities/cri-o-status-capabilities.yml
   - type: Documentation
     url: https://github.com/cri-o/cri-o/blob/main/docs/metrics.md
   - type: Rules
     url: rules/cri-o-metrics-rules.yml
-  - type: Capabilities
-    url: capabilities/cri-o-metrics-capabilities.yml
 common:
+  - type: IssueTracker
+    url: https://github.com/cri-o/cri-o/issues
+  - type: SecurityPolicy
+    url: https://github.com/cri-o/cri-o/blob/main/SECURITY.md
+  - type: CodeOfConduct
+    url: https://github.com/cri-o/cri-o/blob/main/code-of-conduct.md
+  - type: ContributionGuide
+    url: https://github.com/cri-o/cri-o/blob/main/CONTRIBUTING.md
   - type: AgenticAccess
     url: agentic-access/cri-o-agentic-access.yml
   - type: DomainSecurity
