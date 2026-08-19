@@ -1,0 +1,104 @@
+{
+  "item": [
+    {
+      "id": "296bb2cc-001f-4c95-b4a0-3b5e1f3d7684",
+      "name": "Debug",
+      "description": {
+        "content": "Golang debug endpoints for goroutines, heap, and profiling.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b58535b6-2dbf-4099-85a9-9a65a36428d0",
+          "name": "Dump goroutine stacks",
+          "request": {
+            "name": "Dump goroutine stacks",
+            "description": {
+              "content": "Returns the current goroutine stack traces for the daemon.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "debug",
+                "goroutines"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "62174932-f23e-4646-9dd7-c8155971b6ef",
+              "name": "Goroutine stack dump as plain text.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "debug",
+                    "goroutines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:9090",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9e32d538-7fe6-4e82-97e9-8b52a8dbf64c",
+    "name": "CRI-O Metrics Containers Debug API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CRI-O metrics endpoint exposes Prometheus-compatible metrics for operations, image pulls, container lifecycle, and runtime errors. Metrics are enabled with the --enable-metrics daemon flag and served on the port configured by --metrics-port (default 9090) at the /metrics path. The endpoint can also be served over a Unix socket via --metrics-socket and secured using --metrics-cert and --metrics-key for TLS.\n\nContact Support:\n Name: CRI-O Project",
+      "type": "text/plain"
+    }
+  }
+}

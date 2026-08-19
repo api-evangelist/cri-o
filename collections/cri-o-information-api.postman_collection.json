@@ -1,0 +1,172 @@
+{
+  "item": [
+    {
+      "id": "dc06045b-5bab-4f70-8c14-d6004e6163b1",
+      "name": "Information",
+      "description": {
+        "content": "Runtime version, configuration, and general info endpoints.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2bf6b32d-1992-466c-90c3-14ddf89a23c1",
+          "name": "Get runtime information",
+          "request": {
+            "name": "Get runtime information",
+            "description": {
+              "content": "Returns daemon information including storage driver, storage root, cgroup driver, and runtime defaults.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aaada2c0-d74f-4d3f-8f6d-970449116128",
+              "name": "Runtime information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"storage_driver\": \"string\",\n  \"storage_root\": \"string\",\n  \"cgroup_driver\": \"string\",\n  \"default_runtime\": \"string\",\n  \"runtimes\": {\n    \"key_0\": 6038.173031753784,\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0ce2bfd8-1a1c-4283-8278-64ce44267a68",
+          "name": "Get runtime configuration",
+          "request": {
+            "name": "Get runtime configuration",
+            "description": {
+              "content": "Returns the active CRI-O TOML configuration as plain text.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9bccc0c8-4965-4f0f-88a2-bff60a2924c3",
+              "name": "TOML configuration document",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:9090",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e8a8a006-cc8d-4721-b8ac-2b6408bc004b",
+    "name": "CRI-O Metrics Containers Information API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CRI-O metrics endpoint exposes Prometheus-compatible metrics for operations, image pulls, container lifecycle, and runtime errors. Metrics are enabled with the --enable-metrics daemon flag and served on the port configured by --metrics-port (default 9090) at the /metrics path. The endpoint can also be served over a Unix socket via --metrics-socket and secured using --metrics-cert and --metrics-key for TLS.\n\nContact Support:\n Name: CRI-O Project",
+      "type": "text/plain"
+    }
+  }
+}

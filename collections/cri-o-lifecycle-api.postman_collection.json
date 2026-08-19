@@ -1,0 +1,260 @@
+{
+  "item": [
+    {
+      "id": "64747a46-e2da-4eff-8086-9b46a804242d",
+      "name": "Lifecycle",
+      "description": {
+        "content": "Endpoints to pause and unpause running containers.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f41058a6-919f-45a1-bec4-0a3088a33ac7",
+          "name": "Pause a container",
+          "request": {
+            "name": "Pause a container",
+            "description": {
+              "content": "Pauses a running container by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pause",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3274c423-bfc5-480b-89a5-b76671a1d077",
+              "name": "Container paused",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pause",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ede2c1de-76d8-4de1-be31-cba45e1fbf0f",
+              "name": "Container not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pause",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4dee749b-3553-41a6-b74e-20c5bdb6ba90",
+          "name": "Unpause a container",
+          "request": {
+            "name": "Unpause a container",
+            "description": {
+              "content": "Unpauses a paused container by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "unpause",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a1b80a5c-d56e-4c54-baa4-f04b9c4744e1",
+              "name": "Container unpaused",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "unpause",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e2e537b7-3c8e-43ca-9455-9c8aeaf1c2f8",
+              "name": "Container not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "unpause",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:9090",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a1158ba1-9928-4731-865b-9457dcb8c2e6",
+    "name": "CRI-O Metrics Containers Lifecycle API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CRI-O metrics endpoint exposes Prometheus-compatible metrics for operations, image pulls, container lifecycle, and runtime errors. Metrics are enabled with the --enable-metrics daemon flag and served on the port configured by --metrics-port (default 9090) at the /metrics path. The endpoint can also be served over a Unix socket via --metrics-socket and secured using --metrics-cert and --metrics-key for TLS.\n\nContact Support:\n Name: CRI-O Project",
+      "type": "text/plain"
+    }
+  }
+}

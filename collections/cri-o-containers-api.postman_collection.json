@@ -1,0 +1,158 @@
+{
+  "item": [
+    {
+      "id": "5b313aaf-4997-4d95-bc55-c98caa15c264",
+      "name": "Containers",
+      "description": {
+        "content": "Endpoints that return information about live containers.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "78e1fdd7-aa4c-49dd-8d57-e72044655433",
+          "name": "Get container info",
+          "request": {
+            "name": "Get container info",
+            "description": {
+              "content": "Returns runtime information about a single container by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "containers",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Container ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b0397d7d-be8c-455c-83aa-3d434be4490b",
+              "name": "Container information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Container ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"image\": \"string\",\n  \"pid\": 5302,\n  \"sandbox_id\": \"string\",\n  \"created_time\": \"2014-02-17T04:06:48.998Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a52b04e-c6d8-4938-b00c-0fd118fe6780",
+              "name": "Container not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Container ID."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:9090",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "75d5d8ef-66bf-4bb3-a75b-67454b704bb4",
+    "name": "CRI-O Metrics Containers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The CRI-O metrics endpoint exposes Prometheus-compatible metrics for operations, image pulls, container lifecycle, and runtime errors. Metrics are enabled with the --enable-metrics daemon flag and served on the port configured by --metrics-port (default 9090) at the /metrics path. The endpoint can also be served over a Unix socket via --metrics-socket and secured using --metrics-cert and --metrics-key for TLS.\n\nContact Support:\n Name: CRI-O Project",
+      "type": "text/plain"
+    }
+  }
+}

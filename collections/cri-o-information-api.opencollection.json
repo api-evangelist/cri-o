@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "CRI-O Metrics Containers Information API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Information",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get runtime information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9090/info"
+          },
+          "docs": "Returns daemon information including storage driver, storage root, cgroup driver, and runtime defaults."
+        },
+        {
+          "info": {
+            "name": "Get runtime configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:9090/config"
+          },
+          "docs": "Returns the active CRI-O TOML configuration as plain text."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
