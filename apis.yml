@@ -9,6 +9,18 @@ description: >-
   runtime surface, while also exposing an HTTP status API and Prometheus metrics endpoint for operations and
   observability.
 url: https://raw.githubusercontent.com/api-evangelist/cri-o/refs/heads/main/apis.yml
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: false
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: unknown
