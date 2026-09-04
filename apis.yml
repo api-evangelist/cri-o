@@ -69,7 +69,7 @@ modified: '2026-05-19'
 specificationVersion: '0.23'
 type: Index
 access: Public
-position: Provider
+position: Producing
 apis:
 - aid: cri-o:cri-o-cri-grpc-api
   name: CRI-O CRI gRPC API
