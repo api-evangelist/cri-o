@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: CRI-O Containers Metrics API
+  title: CRI-O Metrics API
   description: The CRI-O metrics endpoint exposes Prometheus-compatible metrics for operations, image pulls, container lifecycle, and runtime errors. Metrics are enabled with the --enable-metrics daemon flag and served on the port configured by --metrics-port (default 9090) at the /metrics path. The endpoint can also be served over a Unix socket via --metrics-socket and secured using --metrics-cert and --metrics-key for TLS.
   version: '1.0'
   contact:
