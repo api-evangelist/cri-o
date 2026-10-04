@@ -1,21 +1,19 @@
-# Kin Score artifact — cri-o — 2026-09-01T210448
+# Kin Score artifact — cri-o — 2026-09-24T064009
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: cri-o
-  schema_version: 0.18.0
-  scored_at: '2026-09-01'
-  run_ts: 2026-09-01T210448
-  composite: 41.8
-  band: developing
+  schema_version: 0.22.0
+  scored_at: '2026-09-24'
+  run_ts: 2026-09-24T064009
+  composite: 34.6
+  band: thin
   facets:
     discoverability: 59.3
     contract_quality: 45.9
-    governance: 45.5
+    contract_governance: 45.5
     operational_transparency: 36.8
     developer_ergonomics: 25.0
-    commercial_clarity: 13.2
-    contract_governance: 45.5
     access_clarity: 13.2
   agent_readiness:
     score: 19.8
@@ -40,9 +38,6 @@ kin_score:
       protected_resource_metadata: false
       dynamic_client_registration: false
       agentic_commerce: false
-  open_source:
-    applies: true
-    score: 100.0
   provenance:
     agentic_access: derived
     contracts:
