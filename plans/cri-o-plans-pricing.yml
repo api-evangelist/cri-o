@@ -60,3 +60,19 @@ notes: CRI-O is an open-source CNCF Graduated project with no upstream commercia
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - seat
+  units:
+  - seat
+  plans:
+  - name: Open Source
+    access: freemium
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - per-use
